@@ -1,35 +1,23 @@
-variable "instance_class" {
-  description = "RDS instance class"
-  type        = string
+variable "environment" {
+  default = "dev"
+  
 }
-
 variable "allocated_storage" {
-  description = "RDS allocated storage in GB"
-  type        = number
-}
-
+  default = 20
+}       
 variable "max_allocated_storage" {
-  description = "RDS maximum allocated storage in GB"
-  type        = number
+  default = 100
 }
-
+variable "instance_class" {
+  default = "db.t3.micro"
+}
 variable "username" {
-  description = "RDS master username"
-  type        = string
+  default = "admin"
 }
 
 variable "password" {
-  description = "RDS master password"
-  type        = string
-  sensitive   = true
-}
-
-variable "environment" {
-  description = "Environment name"
-  type        = string
-} 
-
+  default = "Admin123!"
+}       
 variable "project" {
-  description = "project name"
-  type        = string
-} 
+  default = "cbz"
+}
