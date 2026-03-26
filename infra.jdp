@@ -1,0 +1,55 @@
+pipeline {
+agent any
+
+```
+environment {
+    AWS_REGION = 'ap-south-1'
+    TF_IN_AUTOMATION = 'true'
+}
+
+stages {
+
+    stage('Clone Repo') {
+        steps {
+            git branch: 'main', url: 'https://github.com/Nabilqureshi446/3-tier-terraform.git'
+        }
+    }
+
+    stage('Terraform Init') {
+        steps {
+            sh 'terraform init'
+        }
+    }
+
+    stage('Terraform Validate') {
+        steps {
+            sh 'terraform validate'
+        }
+    }
+
+    stage('Terraform Plan') {
+        steps {
+            sh 'terraform plan -out=tfplan'
+        }
+    }
+
+    stage('Terraform Apply') {
+        steps {
+            input message: 'Do you want to apply Terraform changes?'
+            sh 'terraform apply -auto-approve tfplan'
+        }
+    }
+
+}
+
+post {
+    success {
+        echo 'Infrastructure deployed successfully 🚀'
+    }
+    failure {
+        echo 'Pipeline failed ❌'
+    }
+}
+```
+
+}
