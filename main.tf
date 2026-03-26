@@ -3,8 +3,8 @@ provider "aws" {
   
 }
 
-module "rds"{
-  source = "./modules/rds"
+module "RDS"{
+  source = "./modules/RDS"
   project = "cbz"
   environment = "dev"
   allocated_storage = 20
@@ -15,9 +15,9 @@ module "rds"{
 } 
   
 
-module "eks" {
+module "EKS" {
 
-  source = "./modules/eks"
+  source = "./modules/EKS"
   project = "cbz"
   environment = "dev"
     desired_nodes = 3
@@ -27,8 +27,8 @@ module "eks" {
 
 }
 
-module "s3" {
-    source = "./modules/s3"
+module "S3" {
+    source = "./modules/S3"
     environment = "dev"
     bucket_name = "cbz-eks-bucket"
 
