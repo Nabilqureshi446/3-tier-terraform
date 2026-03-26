@@ -11,7 +11,7 @@ module "RDS"{
   max_allocated_storage = 100
   instance_class = "db.t3.micro"
   username = "admin"
-  password = "password123"
+  password = var.db_password
 } 
   
 
