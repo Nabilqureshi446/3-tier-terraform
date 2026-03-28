@@ -9,11 +9,11 @@ pipeline {
         stage('PLAN'){
             steps{
                 sh'''
-            
+                cd modules
                 terraform init
-                terraform plan --var-file=vars/staging.tfvars
+                terraform plan 
                 '''
-                }
+            }
         }
         stage('APPROVAL'){
             steps{
@@ -23,11 +23,11 @@ pipeline {
         stage('APPLY'){
             steps{
                 sh'''
-                
+                cd modules
                 terraform init
-                terraform apply -auto-approve --var-file=vars/staging.tfvars
+                terraform apply -auto-approve
                 '''
             }
         }
-                }
+    }
 }
