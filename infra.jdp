@@ -11,7 +11,7 @@ pipeline {
                 sh'''
                 cd modules
                 terraform init
-                terraform plan 
+                terraform plan --main.tf
                 '''
             }
         }
