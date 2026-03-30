@@ -1,6 +1,6 @@
 # create a bucker 
 resource "aws_s3_bucket" "nabil_bucket" {
-  bucket = var.bucket
+  bucket = var.bucket_name
 
   website {
     index_document = "index.html"
@@ -29,10 +29,12 @@ resource "aws_s3_bucket_policy" "public_read" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.nabil_bucket.arn}/*"
+        Resource  = "${aws_s3_bucket.yash_bucket.arn}/*"
       }
     ]
   })
+    depends_on = [aws_s3_bucket_public_access_block.example]
 
-  depends_on = [aws_s3_bucket_public_access_block.example]
-}
+
+ 
+ }
