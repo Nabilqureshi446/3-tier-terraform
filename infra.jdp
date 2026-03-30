@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    stages{
+
+    stages {
+
         stage('PULL'){
             steps{
                 git branch: 'main', url: 'https://github.com/Nabilqureshi446/3-tier-terraform.git'
@@ -9,9 +11,9 @@ pipeline {
         stage('PLAN'){
             steps{
                 sh'''
-                cd modules
-                terraform init
-                terraform plan --main.tf
+                    cd modules
+                    terraform init
+                    terraform plan --var-file=VARS/DEV.tfvars
                 '''
             }
         }
@@ -23,9 +25,9 @@ pipeline {
         stage('APPLY'){
             steps{
                 sh'''
-                cd modules
-                terraform init
-                terraform apply -auto-approve
+                    cd modules
+                    terraform init
+                    terraform apply -auto-approve --var-file=VARS/DEV.tfvars
                 '''
             }
         }

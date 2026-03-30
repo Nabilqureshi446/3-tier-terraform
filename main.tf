@@ -1,36 +1,38 @@
 provider "aws" {
-    region = "us-east-1"
-  
+  region = var.region
 }
 
-module "RDS"{
-  source = "./modules/RDS"
-  project = "cbz"
-  environment = "dev"
-  allocated_storage = 20
-  max_allocated_storage = 100
-  instance_class = "db.t3.micro"
-  username = "admin"
-  password = var.db_password
-} 
-  
+
 
 module "EKS" {
+#   Path to the EKS module
+  source = "./EKS"
 
-  source = "./modules/EKS"
-  project = "cbz"
-  environment = "dev"
-    desired_nodes = 3
-    max_nodes = 10
-    min_nodes = 1
-    node_instance_type = "t3.medium"
+  aws_eks_cluster_name = var.aws_eks_cluster_name
+#   EKS Node Group scaling 
+  desired_size = var.desired_size
+  max_size = var.max_size
+  min_size = var.min_size
 
+#   EKS Node Group instance types
+  instance_types = var.instance_types
+ 
 }
 
-module "S3" {
-    source = "./modules/S3"
-    environment = "dev"
-    bucket_name = "cbz-eks-bucket"
 
-  
+module "RDS" {
+  source = "./RDS"
+
+  allocated_storage = var.allocated_storage
+  max_allocated_storage = var.max_allocated_storage
+  instance_class = var.instance_class
+  username = var.username
+  password = var.password
+}
+
+
+module "s3" {
+  source = "./S3"
+
+  bucket = var.bucket
 }
