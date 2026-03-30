@@ -34,5 +34,5 @@ module "s3" {
   source = "./S3"
 
   bucket_name = var.bucket
-  environment = "dev" 
+  environment = "dev"
 }
