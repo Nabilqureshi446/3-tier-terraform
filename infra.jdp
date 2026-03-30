@@ -13,7 +13,7 @@ pipeline {
                 sh'''
                     cd modules
                     terraform init
-                    terraform plan --var-file=VARS/DEV.tfvars
+                    terraform plan -var-file=VARS/DEV.tfvars
                 '''
             }
         }
@@ -27,7 +27,7 @@ pipeline {
                 sh'''
                     cd modules
                     terraform init
-                    terraform apply -auto-approve --var-file=VARS/DEV.tfvars
+                    terraform apply -auto-approve -var-file=VARS/DEV.tfvars
                 '''
             }
         }
