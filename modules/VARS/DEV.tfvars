@@ -7,14 +7,14 @@ aws_eks_cluster_name = "my-eks-cluster"
 desired_size =1
 max_size =3
 min_size = 1
-instance_types = ["db.c7i-flex.large"]
+instance_types = ["t3.medium"]
 
 
 # RDS
 
 allocated_storage = 10
 max_allocated_storage = 20
-instance_class = "t3.medium"
+instance_class = "db.t3.micro"
 username = "admin"
 password = "Admin1234" 
 

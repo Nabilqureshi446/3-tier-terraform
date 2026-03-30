@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "nabil_bucket" {
   bucket = var.bucket_name
 
   # Enable static website hosting
-  website {
+    website{
     index_document = "index.html"
     error_document = "error.html"
   }
