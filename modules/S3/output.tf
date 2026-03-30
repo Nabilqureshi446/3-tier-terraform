@@ -1,3 +1,5 @@
-output "bucket_endpoint" {
-  value = aws_s3_bucket.b48_bucket.website_endpoint
+# Output the bucket's website endpoint
+output "website_endpoint" {
+  value       = aws_s3_bucket.nabil_bucket.website_endpoint
+  description = "The URL to access the static website"
 }

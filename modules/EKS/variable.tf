@@ -1,25 +1,13 @@
-variable "project"{
-  default = "cbz"
-  
-}
+# EKS Cluster name
+variable "aws_eks_cluster_name" {}
 
-variable "environment" {
-  default = "dev"
-  
-}
 
-variable "desired_nodes" {
-  default = 3
-}
+# EKS Node Group desired, max, and min size
+variable "desired_size" {}
 
-variable "max_nodes" {
-  default = 10
-}
+variable "max_size" {}
 
-variable "min_nodes" {
-  default = 1
-}
+variable "min_size" {}
 
-variable "node_instance_type" {
-  default = "t3.medium"
-}
+# Instance types for EKS Node Group
+variable "instance_types" {}
