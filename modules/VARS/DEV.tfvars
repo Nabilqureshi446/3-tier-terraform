@@ -14,7 +14,7 @@ instance_types = ["db.c7i-flex.large"]
 
 allocated_storage = 10
 max_allocated_storage = 20
-instance_class = "db.t3.micro"
+instance_class = "t3.medium"
 username = "admin"
 password = "Admin1234" 
 
