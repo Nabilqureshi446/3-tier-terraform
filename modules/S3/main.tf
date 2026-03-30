@@ -1,16 +1,22 @@
-# create a bucker 
-resource "aws_s3_bucket" "nabil_bucket" {
-  bucket = var.bucket
+# Create an S3 bucket
+resource "aws_s3_bucket" "cbz_bucket" {
+  bucket = var.bucket_name
 
+  # Enable static website hosting
   website {
     index_document = "index.html"
     error_document = "error.html"
   }
+
+  tags = {
+    Name        = "StaticWebsiteBucket"
+    Environment = var.environment
+  }
 }
 
-#  decible public access block
+# Disable Block Public Access
 resource "aws_s3_bucket_public_access_block" "example" {
-  bucket = aws_s3_bucket.nabil_bucket.bucket
+  bucket = aws_s3_bucket.cbz_bucket.bucket
 
   block_public_acls       = false
   block_public_policy     = false
@@ -18,9 +24,9 @@ resource "aws_s3_bucket_public_access_block" "example" {
   restrict_public_buckets = false
 }
 
-# give bucket policy (it is important for public access)
-resource "aws_s3_bucket_policy" "public_read" {
-  bucket = aws_s3_bucket.nabil_bucket.id
+# Set the bucket policy to allow public read access (use cautiously)
+resource "aws_s3_bucket_policy" "static_website_policy" {
+  bucket = aws_s3_bucket.cbz_bucket.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -29,10 +35,15 @@ resource "aws_s3_bucket_policy" "public_read" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.nabil_bucket.arn}/*"
+        Resource  = "${aws_s3_bucket.cbz_bucket.arn}/*"
       }
     ]
   })
-
   depends_on = [aws_s3_bucket_public_access_block.example]
+}
+
+# Output the bucket's website endpoint
+output "website_endpoint" {
+  value       = aws_s3_bucket.cbz_bucket.website_endpoint
+  description = "The URL to access the static website"
 }

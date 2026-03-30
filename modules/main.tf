@@ -14,6 +14,7 @@ module "EKS" {
   max_size = var.max_size
   min_size = var.min_size
 
+
 #   EKS Node Group instance types
   instance_types = var.instance_types
  
@@ -29,10 +30,9 @@ module "RDS" {
   username = var.username
   password = var.password
 }
-
-
 module "s3" {
   source = "./S3"
 
-  bucket = var.bucket
+  bucket_name = var.bucket
+  environment = "dev" 
 }
