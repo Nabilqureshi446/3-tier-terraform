@@ -1,5 +1,5 @@
 # create a bucker 
-resource "aws_s3_bucket" "yash_bucket" {
+resource "aws_s3_bucket" "nabil_bucket" {
   bucket = var.bucket
 
   website {
@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "yash_bucket" {
 
 #  decible public access block
 resource "aws_s3_bucket_public_access_block" "example" {
-  bucket = aws_s3_bucket.yash_bucket.bucket
+  bucket = aws_s3_bucket.nabil_bucket.bucket
 
   block_public_acls       = false
   block_public_policy     = false
@@ -20,7 +20,7 @@ resource "aws_s3_bucket_public_access_block" "example" {
 
 # give bucket policy (it is important for public access)
 resource "aws_s3_bucket_policy" "public_read" {
-  bucket = aws_s3_bucket.yash_bucket.id
+  bucket = aws_s3_bucket.nabil_bucket.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -29,7 +29,7 @@ resource "aws_s3_bucket_policy" "public_read" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.yash_bucket.arn}/*"
+        Resource  = "${aws_s3_bucket.nabil_bucket.arn}/*"
       }
     ]
   })
