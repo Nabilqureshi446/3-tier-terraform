@@ -21,4 +21,4 @@ password = "Admin1234"
 
 # S3
 
-bucket = "nabil-abc-12300"
+bucket = "nabil-test-bucket-12345"
